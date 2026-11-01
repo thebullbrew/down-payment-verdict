@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Down Payment Verdict — How Much Down Actually Wins?</title>
+<meta name="description" content="Compare 3.5% to 25% down on real wealth: PMI burn, interest, opportunity cost of your cash, reserves left, and the honest winner over your hold.">
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0F0A07">
+<link rel="icon" href="icons/icon-32.png">
+<style>
+:root{--bg:#0F0A07;--surface:#1A120C;--surface2:#241910;--text:#F2E9D8;--muted:#C9B99A;--port:#8E2432;--port2:#A62B3C;--gold:#C9973F;--gold2:#E3B85C;--line:#3A2A18;--good:#7FB069;--bad:#E07A5F}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Georgia,'Times New Roman',serif;line-height:1.5}
+.leather{background:repeating-linear-gradient(45deg,#1A120C 0 6px,#1E150D 6px 12px);border-top:4px solid var(--port)}
+.wrap{max-width:1100px;margin:0 auto;padding:20px 16px 60px}
+.eyebrow{letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-size:.72rem;font-weight:bold}
+h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.05;margin:.2em 0;color:var(--gold2)}
+h2{color:var(--gold2);border-bottom:3px solid var(--port);padding-bottom:6px;margin-top:36px}
+.sub{color:var(--muted);font-size:1.05rem;max-width:760px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;margin:16px 0;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.hero{background:linear-gradient(160deg,#2A0E13,#1A120C 65%);border:1px solid var(--port);text-align:center;padding:28px 18px}
+.seal{display:inline-block;border:3px double var(--gold);color:var(--gold2);border-radius:50%;width:168px;height:168px;line-height:1.2;padding-top:52px;font-weight:bold;letter-spacing:.06em;text-transform:uppercase;background:radial-gradient(circle,var(--port) 0%,#5E1620 75%);color:#F2E9D8;font-size:1.05rem;transform:rotate(-4deg)}
+.seal small{display:block;font-size:.62rem;letter-spacing:.18em;margin-top:6px;color:var(--gold2)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+label{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px}
+input,select{width:100%;padding:10px;background:#0F0A07;border:1px solid var(--line);color:var(--text);border-radius:6px;font-family:inherit;font-size:1rem}
+button{background:var(--port);color:#F2E9D8;border:1px solid var(--gold);padding:11px 18px;border-radius:6px;font-family:inherit;font-weight:bold;cursor:pointer;letter-spacing:.04em}
+button.secondary{background:transparent;color:var(--gold2)}
+.big{font-size:clamp(1.7rem,4vw,2.6rem);color:var(--gold2);font-weight:bold}
+table{width:100%;border-collapse:collapse;font-size:.94rem}th,td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:right}th:first-child,td:first-child{text-align:left}th{color:var(--gold);letter-spacing:.05em;text-transform:uppercase;font-size:.74rem}
+tr.best td{background:rgba(142,36,50,.28);font-weight:bold}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}.kpi div{background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:12px}.kpi b{color:var(--gold2);font-size:1.25rem;display:block}
+.note{color:var(--muted);font-size:.9rem}.warn{color:var(--bad);font-weight:bold}.ok{color:var(--good);font-weight:bold}
+.bar{height:14px;background:#0F0A07;border:1px solid var(--line);border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--port),var(--gold))}
+footer{color:var(--muted);font-size:.85rem;margin-top:40px;border-top:1px solid var(--line);padding-top:14px}
+@media(max-width:700px){table{font-size:.82rem}th,td{padding:7px 4px}}
+</style></head><body>
+<div class="leather"><div class="wrap">
+<p class="eyebrow">The Bull Brew · One Useful Tool Every Day</p>
+<h1>The Down Payment Verdict</h1>
+<p class="sub">Everyone argues 5% vs 20% down like it's religion. It isn't. It's arithmetic — PMI burn, interest, what your spare cash could earn, and whether you still have reserves the day after closing. Put your numbers in. Get a verdict, not a lecture.</p>
+
+<div class="card hero">
+<div class="seal" id="seal">—<small>Verdict</small></div>
+<p class="big" id="verdictHead">Run the numbers.</p>
+<p id="verdictBody" class="sub" style="margin:0 auto"></p>
+</div>
+
+<div class="card"><h2 style="margin-top:0">Your deal</h2><div class="grid">
+<div><label>Home price $</label><input id="price" type="number" value="425000"></div>
+<div><label>Rate %</label><input id="rate" type="number" step="0.01" value="6.75"></div>
+<div><label>Term (years)</label><select id="term"><option>30</option><option>20</option><option>15</option></select></div>
+<div><label>Cash you have $</label><input id="cash" type="number" value="110000"></div>
+<div><label>Closing costs % of price</label><input id="closingPct" type="number" step="0.1" value="2.5"></div>
+<div><label>Property tax % / year</label><input id="taxRate" type="number" step="0.05" value="1.10"></div>
+<div><label>Insurance $/mo</label><input id="ins" type="number" value="185"></div>
+<div><label>HOA $/mo</label><input id="hoa" type="number" value="0"></div>
+<div><label>PMI rate % of loan / year</label><input id="pmiRate" type="number" step="0.05" value="0.55"></div>
+<div><label>What spare cash earns %/yr</label><input id="ret" type="number" step="0.25" value="7"></div>
+<div><label>Home appreciation %/yr</label><input id="app" type="number" step="0.25" value="3"></div>
+<div><label>Years you'll hold</label><input id="hold" type="number" value="7"></div>
+<div><label>Reserves you refuse to touch $</label><input id="reserve" type="number" value="15000"></div>
+</div>
+<p style="margin-top:16px"><button onclick="calc()">Deliver the verdict</button> <button class="secondary" onclick="saveScenario()">Save scenario</button> <button class="secondary" onclick="copySummary()">Copy summary</button></p>
+<p class="note">PMI is modelled on the scheduled balance reaching 80% of the purchase price. Tax, insurance and HOA are the same in every scenario, so they don't change the winner — they're shown so the all-in payment is honest.</p>
+</div>
+
+<div class="card"><h2 style="margin-top:0">Six ways in — same house</h2><div style="overflow-x:auto"><table id="tbl"><thead><tr><th>Down</th><th>Cash to close</th><th>Cash left</th><th>All-in /mo*</th><th>PMI total</th><th>Interest paid</th><th>Wealth at hold</th></tr></thead><tbody></tbody></table></div>
+<p class="note">*All-in in month one (P&amp;I + tax + insurance + HOA + PMI where it applies). Wealth at hold = home equity + leftover cash grown at your return + every month of payment savings versus the dearest option, also invested. That's the only fair fight.</p>
+<div id="reserveNote"></div></div>
+
+<div class="card"><h2 style="margin-top:0">The showdown: 20% vs 5%</h2><div class="kpi">
+<div>Extra cash down<b id="kExtra">—</b></div>
+<div>Monthly saving<b id="kMonthly">—</b></div>
+<div>PMI avoided<b id="kPmi">—</b></div>
+<div>Interest saved (hold)<b id="kInt">—</b></div>
+<div>Opportunity cost of extra down<b id="kOpp">—</b></div>
+<div>Net winner by<b id="kNet">—</b></div>
+</div><p class="note" id="paybackNote"></p></div>
+
+<div class="card"><h2 style="margin-top:0">Hold longer, answer changes</h2><p class="note">Net advantage of 20% down over 5% down, by how long you actually stay. Short holds punish big down payments — the cash never gets time to earn its keep inside the loan.</p>
+<div style="overflow-x:auto"><table id="sens"><thead><tr><th>Hold</th><th>3 yrs</th><th>5 yrs</th><th>7 yrs</th><th>10 yrs</th><th>15 yrs</th></tr></thead><tbody><tr><td>20% beats 5% by</td><td colspan="5">—</td></tr></tbody></table></div></div>
+
+<div class="card"><h2 style="margin-top:0">Saved scenarios</h2><div id="saved" class="note">None yet.</div></div>
+
+<div class="card"><h2 style="margin-top:0">The method</h2>
+<p>Three rules. <strong>First, reserves beat percentages.</strong> A 20% down payment that leaves you with $900 and a 40-year-old furnace isn't smart, it's theatre. <strong>Second, PMI is a rent you pay for your own money</strong> — price it in full, to the month it dies, not as a vague annoyance. <strong>Third, cash has a job.</strong> Every extra dollar down is a dollar that can't be invested, can't fix a roof, and can't carry you through a bad quarter. If it doesn't beat what that dollar earns outside the house, it stays outside the house.</p>
+<p class="note">Estimates only — not financial advice. PMI, tax and closing figures vary by lender, state and credit. Verify with your lender's Loan Estimate.</p></div>
+
+<footer>Built by The Bull Brew · One useful tool, every day · Design: Port &amp; Cigar (variation 16) — port-wine actions, amber-gold type, leather-dark panels.</footer>
+</div></div>
+<script>
+const $=id=>document.getElementById(id);const fmt=n=>'$'+Math.round(n).toLocaleString('en-US');const fmtS=n=>(n<0?'-$':'$')+Math.abs(Math.round(n)).toLocaleString('en-US');
+function vals(){return{price:+$('price').value||0,rate:+$('rate').value||0,term:+$('term').value||30,cash:+$('cash').value||0,closingPct:+$('closingPct').value||0,taxRate:+$('taxRate').value||0,ins:+$('ins').value||0,hoa:+$('hoa').value||0,pmiRate:+$('pmiRate').value||0,ret:+$('ret').value||0,app:+$('app').value||0,hold:Math.max(1,+ $('hold').value||7),reserve:+$('reserve').value||0}}
+function scenario(v,downPct,holdYrs){
+ const down=v.price*downPct/100,loan=v.price-down,closing=v.price*v.closingPct/100,cashToClose=down+closing,left=v.cash-cashToClose;
+ const r=v.rate/100/12,n=v.term*12,pi=r>0?loan*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1):loan/n;
+ const pmiMo=downPct<20?loan*v.pmiRate/100/12:0;const months=Math.min(holdYrs*12,n);
+ let bal=loan,intPaid=0,pmiPaid=0,pmiMonths=0;const monthlyCost=[];
+ // PMI runs until the scheduled balance reaches 80% of the purchase price
+ for(let m=0;m<months;m++){const interest=bal*r;const princ=Math.min(pi-interest,bal);const pmi=(pmiMo>0&&bal> v.price*0.80)?pmiMo:0;if(pmi>0){pmiPaid+=pmi;pmiMonths++}bal-=princ;intPaid+=interest;monthlyCost.push(pi+pmi)}
+ const futureHome=v.price*Math.pow(1+v.app/100,holdYrs);const equity=futureHome-bal;
+ const leftFV=left*Math.pow(1+v.ret/100,holdYrs);
+ return{downPct,down,loan,closing,cashToClose,left,pi,pmiMo,pmiPaid,pmiMonths,intPaid,bal,equity,leftFV,monthlyCost,taxMo:v.price*v.taxRate/100/12}
+}
+function wealth(v,s,holdYrs,refCosts){let fv=s.equity+s.leftFV;const mr=v.ret/100/12,months=Math.min(holdYrs*12,v.term*12);for(let m=0;m<months;m++){const diff=(refCosts[m]||0)-(s.monthlyCost[m]||0);fv+=diff*Math.pow(1+mr,months-m)}return fv}
+let last=null;
+function calc(){const v=vals();const pcts=[3.5,5,10,15,20,25];let rows=pcts.map(p=>scenario(v,p,v.hold));
+ // reference = highest monthly cost stream (month-by-month max)
+ const months=Math.min(v.hold*12,v.term*12);const ref=[];for(let m=0;m<months;m++)ref.push(Math.max(...rows.map(s=>s.monthlyCost[m]||0)));
+ rows.forEach(s=>s.wealth=wealth(v,s,v.hold,ref));
+ const best=[...rows].sort((a,b)=>b.wealth-a.wealth)[0];
+ const tb=document.querySelector('#tbl tbody');tb.innerHTML=rows.map(s=>'<tr class="'+(s===best?'best':'')+'"><td>'+s.downPct+'% ('+fmt(s.down)+')</td><td>'+fmt(s.cashToClose)+'</td><td>'+fmtS(s.left)+'</td><td>'+fmt(s.pi+s.pmiMo+v.price*v.taxRate/100/12+v.ins+v.hoa)+'</td><td>'+fmt(s.pmiPaid)+(s.pmiMonths?' · '+s.pmiMonths+' mo':'')+'</td><td>'+fmt(s.intPaid)+'</td><td><strong>'+fmt(s.wealth)+'</strong></td></tr>').join('');
+ const s5=rows[1],s20=rows[4];const extra=s20.down-s5.down;const opp=extra*(Math.pow(1+v.ret/100,v.hold)-1);
+ $('kExtra').textContent=fmt(extra);$('kMonthly').textContent=fmt((s5.pi+s5.pmiMo)-(s20.pi+s20.pmiMo));$('kPmi').textContent=fmt(s5.pmiPaid-s20.pmiPaid);$('kInt').textContent=fmt(s5.intPaid-s20.intPaid);$('kOpp').textContent=fmt(opp);$('kNet').textContent=fmtS(s20.wealth-s5.wealth);
+ const monthlySave=(s5.pi+s5.pmiMo)-(s20.pi+s20.pmiMo);$('paybackNote').textContent=monthlySave>0?('Payback on the extra down, from payment + PMI savings alone: '+(extra/monthlySave).toFixed(1)+' months — before counting interest saved or what the cash could earn elsewhere.'):'';
+ // sensitivity
+ const holds=[3,5,7,10,15];const cells=holds.map(h=>{const a=scenario(v,5,h),b=scenario(v,20,h);const mm=Math.min(h*12,v.term*12);const rf=[];for(let m=0;m<mm;m++)rf.push(Math.max(a.monthlyCost[m]||0,b.monthlyCost[m]||0));return fmtS(wealth(v,b,h,rf)-wealth(v,a,h,rf))});
+ document.querySelector('#sens tbody').innerHTML='<tr><td>20% beats 5% by</td>'+cells.map(c=>'<td>'+c+'</td>').join('')+'</tr>';
+ // reserve + verdict
+ const reserveOk=s20.left>=v.reserve;
+ $('reserveNote').innerHTML=reserveOk?'<p class="ok">Reserve guard: 20% down still leaves '+fmt(s20.left)+' — above your '+fmt(v.reserve)+' untouchable line.</p>':'<p class="warn">Reserve guard: 20% down leaves only '+fmtS(s20.left)+', below your '+fmt(v.reserve)+' untouchable line. That is the verdict before any spreadsheet speaks.</p>';
+ let seal,head,body;
+ if(!reserveOk){seal='KEEP<br>CASH';head='Keep your cash. The reserve rule wins.';body='20% down breaks your '+fmt(v.reserve)+' reserve line, leaving '+fmtS(s20.left)+'. The wealth winner on paper is '+best.downPct+'% down, but a house you cannot afford to repair is not an asset. Stay liquid, kill PMI later with extra principal or an appraisal.'}
+ else if(best.downPct>=20){seal='GO<br>20%+';head='Put the 20% down. It earns its keep.';body='With reserves intact, '+best.downPct+'% down builds the most wealth over '+v.hold+' years ('+fmt(best.wealth)+'), dodging '+fmt(s5.pmiPaid)+' of PMI at 5% down and '+fmt(s5.intPaid-s20.intPaid)+' of interest. Dead cash? No — this cash is working.'}
+ else if(best.downPct<=5){seal='GO<br>SMALL';head='Go small. Your cash works harder outside.';body='Over '+v.hold+' years, '+best.downPct+'% down wins at '+fmt(best.wealth)+' — the extra down payment cannot beat a '+v.ret+'% return elsewhere, even after paying '+fmt(best.pmiPaid)+' in PMI. Short holds and real returns punish big down payments.'}
+ else{seal='SPLIT<br>IT';head='Split the difference at '+best.downPct+'% down.';body='The middle wins: '+best.downPct+'% down builds '+fmt(best.wealth)+' over '+v.hold+' years, keeps '+fmt(best.left)+' in reserve, and shrinks PMI to '+fmt(best.pmiPaid)+'. Neither dogma — not 5%, not 20% — survives your actual numbers.'}
+ $('seal').innerHTML=seal+'<small>Verdict</small>';$('verdictHead').textContent=head;$('verdictBody').textContent=body;
+ last={v,rows,best,seal:seal.replace('<br>',' '),head};renderSaved()}
+function saveScenario(){if(!last)calc();const arr=JSON.parse(localStorage.getItem('dpv')||'[]');arr.push({d:new Date().toLocaleDateString(),price:last.v.price,hold:last.v.hold,best:last.best.downPct,wealth:Math.round(last.best.wealth),head:last.head});localStorage.setItem('dpv',JSON.stringify(arr));renderSaved()}
+function renderSaved(){const arr=JSON.parse(localStorage.getItem('dpv')||'[]');$('saved').innerHTML=arr.length?arr.map((x,i)=>'<p>'+x.d+' — '+fmt(x.price)+' home, '+x.hold+'-yr hold → best '+x.best+'% down, wealth '+fmt(x.wealth)+' <button class="secondary" onclick="delSaved('+i+')">Delete</button></p>').join(''):'None yet.'}
+function delSaved(i){const arr=JSON.parse(localStorage.getItem('dpv')||'[]');arr.splice(i,1);localStorage.setItem('dpv',JSON.stringify(arr));renderSaved()}
+function copySummary(){if(!last)calc();const t='The Down Payment Verdict — '+fmt(last.v.price)+' at '+last.v.rate+'%, '+last.v.hold+'-yr hold. Verdict: '+last.head+' Best: '+last.best.downPct+'% down, wealth '+fmt(last.best.wealth)+', cash left '+fmt(last.best.left)+'. 20% vs 5% net: '+fmtS(last.rows[4].wealth-last.rows[1].wealth)+'.';navigator.clipboard&&navigator.clipboard.writeText(t);alert('Summary copied.')}
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');calc();
+</script></body></html>
